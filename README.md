@@ -37,6 +37,57 @@ Whether you're running a simple internal app or deploying services on a public c
 
 ---
 
+## ⚙️ How to Apply the Manifests
+
+All Kubernetes YAML manifests are located in the [`manifests/`](./manifests/) directory.
+
+### 🧱 Apply Order (Recommended)
+
+Apply the resources in this order:
+
+1. `configmap.yaml`
+2. `secret.yaml`
+3. `pod-env.yaml`
+4. `pod-args.yaml`
+5. `pod-volume.yaml`
+
+This ensures that all referenced `ConfigMaps` and `Secrets` exist before the Pods that consume them are created.
+ 
+---
+
+### 🛠️ Applying the Manifests (Cross-Platform)
+
+#### 🔹 Linux/macOS/WSL (Using `Makefile`)
+
+If you're using a Unix-like environment (Linux, macOS, or Windows with WSL), you can use the included `Makefile` to simplify applying and removing resources:
+
+```bash
+make apply-all     # Applies all manifests
+make delete-all    # Deletes all manifests
+make logs          # View logs from demo pods
+```
+
+---
+
+## Repository Structure
+ 
+```bash
+k8s-configmap-secret-patterns/
+├── manifests/                  # All Kubernetes YAML files
+│   ├── configmap.yaml
+│   ├── secret.yaml
+│   ├── pod-env.yaml
+│   ├── pod-args.yaml
+│   └── pod-volume.yaml
+├── Makefile                    # Automation for applying and deleting resources
+├── README.md                   # Documentation and usage guide
+├── .gitignore                  # Common ignores
+└── LICENSE                     # MIT License
+```
+
+---
+
+
 ## 🛡️ Security & Best Practice Summary
 
 | Injection Method     | Pros                                | Cons / Risks                              | Best Use Case                             |
