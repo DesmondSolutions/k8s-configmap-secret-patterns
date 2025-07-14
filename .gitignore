@@ -1,0 +1,14 @@
+# Ignore editor/project files
+.vscode/
+.idea/
+*.swp
+
+# macOS
+.DS_Store
+
+# Kubernetes-related
+*.log
+*.out
+
+# Helm or templating (if added later)
+charts/
