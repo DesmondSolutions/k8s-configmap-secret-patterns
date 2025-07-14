@@ -1,0 +1,23 @@
+#use as cli arguments in a Pod
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-args
+spec:
+  containers:
+    - name: app
+      image: busybox
+      command: ["sh", "-c"]
+      args:
+        - echo Mode=$APP_MODE Port=$APP_PORT && sleep 3600
+      env:
+        - name: APP_MODE
+          valueFrom:
+            configMapKeyRef:
+              name: my-config
+              key: APP_MODE
+        - name: APP_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: my-config
+              key: APP_PORT

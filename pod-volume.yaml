@@ -1,0 +1,22 @@
+#use as file in volume
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-volume
+spec:
+  containers:
+    - name: app
+      image: busybox
+      command: ["sh", "-c", "ls /etc/config && cat /etc/secret/DB_PASSWORD && sleep 3600"]
+      volumeMounts:
+        - name: config-vol
+          mountPath: /etc/config
+        - name: secret-vol
+          mountPath: /etc/secret
+  volumes:
+    - name: config-vol
+      configMap:
+        name: my-config
+    - name: secret-vol
+      secret:
+        secretName: my-secret

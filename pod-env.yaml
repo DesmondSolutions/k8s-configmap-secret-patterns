@@ -1,0 +1,15 @@
+#use as Environment variables in a Pod
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-env
+spec:
+  containers:
+    - name: app
+      image: busybox
+      command: ["sh", "-c", "env && sleep 3600"]
+      envFrom:
+        - configMapRef:
+            name: my-config
+        - secretRef:
+            name: my-secret
